@@ -1,6 +1,9 @@
-import { FormEvent, useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import ReactSelect from "react-select";
+
+import { useForm, Controller } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 
 const OPTIONS = [
     {
@@ -12,40 +15,42 @@ const OPTIONS = [
         label: "Owoce",
     },
 ];
-type SelectedOptionProps = {
-    label: string;
-    value: number;
-};
+
+const schema = yup.object().shape({
+    category: yup.object().required().typeError("Category is required"),
+});
 
 function Select() {
-    const [selectedOption, setSelectedOption] = useState<
-        SelectedOptionProps | undefined
-    >();
-    const [errorMessage, setErrorMessage] = useState(false);
-    function handleSubmit(e: FormEvent) {
-        e.preventDefault();
-        if (selectedOption == undefined) {
-            setErrorMessage(true);
-        }
-    }
+    const {
+        handleSubmit,
+        control,
+        formState: { errors },
+    } = useForm({
+        resolver: yupResolver(schema),
+    });
+    const onSubmit = (data: object) => {
+        console.log(data);
+    };
+
     return (
-        <Form onSubmit={handleSubmit}>
+        <Form onSubmit={handleSubmit(onSubmit)}>
             <Form.Label htmlFor="select">Jedzenie</Form.Label>
-            <ReactSelect
-                value={selectedOption}
-                onChange={(e) => {
-                    setSelectedOption({
-                        label: e!.label,
-                        value: e!.value,
-                    });
-                    setErrorMessage(false);
-                }}
-                className="w-50"
-                name="select"
-                placeholder="Wybierz"
-                options={OPTIONS}
+            <Controller
+                name="category"
+                control={control}
+                defaultValue=""
+                render={({ field }) => (
+                    <ReactSelect
+                        {...field}
+                        className="w-50"
+                        options={OPTIONS}
+                        placeholder="Select Category"
+                    />
+                )}
             />
-            {errorMessage && <p className="text-danger">Select something</p>}
+            {errors.category && (
+                <p className="text-danger">{errors.category.message}</p>
+            )}
             <Button type="submit" className="mt-1" variant="dark">
                 Wyślij
             </Button>
