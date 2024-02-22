@@ -1,0 +1,38 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.wrapper {
+    max-width: 500px;
+    margin: 100px auto;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+input[type="checkbox"] {
+    accent-color: black;
+    height: 1.5rem;
+    width: 1.5rem;
+    padding: 10px;
+    cursor: pointer;
+}
+.fruit {
+    display: flex !important;
+    align-items: center;
+    width: 100%;
+    gap: 1rem;
+}
+.fruit input {
+    height: 1.2rem;
+    width: 1.2rem;
+}
+
+button {
+    border: none;
+    background-color: transparent;
+}
