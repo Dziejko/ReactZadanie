@@ -34,7 +34,7 @@ function Select() {
 
     return (
         <Form onSubmit={handleSubmit(onSubmit)}>
-            <Form.Label htmlFor="select">Jedzenie</Form.Label>
+            <Form.Label htmlFor="category">Jedzenie</Form.Label>
             <Controller
                 name="category"
                 control={control}
