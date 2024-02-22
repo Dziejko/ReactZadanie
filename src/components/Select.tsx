@@ -32,6 +32,7 @@ function Select() {
         console.log(data);
     };
 
+   
     return (
         <Form onSubmit={handleSubmit(onSubmit)}>
             <Form.Label htmlFor="category">Jedzenie</Form.Label>
@@ -51,7 +52,7 @@ function Select() {
             {errors.category && (
                 <p className="text-danger">{errors.category.message}</p>
             )}
-            <Button type="submit" className="mt-1" variant="dark">
+            <Button  type="submit" className="mt-1 arrow-btn" variant="dark">
                 Wyślij
             </Button>
         </Form>

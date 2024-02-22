@@ -40,6 +40,10 @@ function Header({
             setFruits(updatedList);
         }
     }
+    function onClick() {
+        setIsVisible(!isVisible);
+        document.getElementById("arrow-btn")?.classList.toggle("rotate");
+    }
     return (
         <>
             <div className="header-container mt-5">
@@ -50,7 +54,7 @@ function Header({
                     type="checkbox"
                 />
                 <label htmlFor="main-chekbox">Owoce</label>
-                <button onClick={() => setIsVisible(!isVisible)}>
+                <button id="arrow-btn" onClick={onClick}>
                     {" "}
                     <IoIosArrowUp size={30} />
                 </button>
